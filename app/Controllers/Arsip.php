@@ -12,7 +12,7 @@ class Arsip extends BaseController
     {
         $this->Marsip = new Marsip();
         $this->Mkategori = new Mkategori();
-        helper('form','number');
+        helper('form', 'number');
     }
 
     public function index()
@@ -96,6 +96,98 @@ class Arsip extends BaseController
             //if not valid
             session()->setFlashdata('errors', \Config\Services::validation()->getErrors());
             return redirect()->to(base_url('arsip/add'));
+        }
+    }
+
+    public function edit($id)
+    {
+        $data = array(
+            'title' => 'Add Arsip',
+            'kategori' => $this->Mkategori->getData(),
+            'arsip' => $this->Marsip->detailData($id),
+            'isi' => 'arsip/edit'
+        );
+        return view('layout/wrapper', $data);
+    }
+
+    public function update($id)
+    {
+        if ($this->validate([
+            'nama_arsip' => [
+                'label' => 'Nama Arsip',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} required'
+                ]
+            ],
+            'idkategori' => [
+                'label' => 'Kategori',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} required',
+                ]
+            ],
+            'deskripsi' => [
+                'label' => 'Deskripsi',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} required',
+                ]
+            ],
+            'file_arsip' => [
+                'label' => 'File',
+                'rules' => 'max_size[file_arsip,2048]|ext_in[file_arsip,pdf]',
+                'errors' => [
+                    'max_size' => 'Max {field} 2mb',
+                    'ext_in' => 'Hanya diperbolehkan upload {field} berformat pdf',
+                ]
+            ],
+        ])) {
+            $file_arsip = $this->request->getFile('file_arsip');
+            if ($file_arsip->getError() == 4) {
+                //kondisi file tak diganti
+                $data = array(
+                    'id_arsip' => $id,
+                    'no_arsip' => $this->request->getPost('no_arsip'),
+                    'idkategori' => $this->request->getPost('idkategori'),
+                    'nama_arsip' => $this->request->getPost('nama_arsip'),
+                    'deskripsi' => $this->request->getPost('deskripsi'),
+                    'tgl_update' => date('Y-m-d'),
+                    'iddepartemen' => session()->get('iddepartemen'),
+                    'iduser' => session()->get('id_user'),
+                );
+                $this->Marsip->edit($data);
+            } else {
+                //jika file diganti
+                $arsip =  $this->Marsip->detailData($id);
+                if ($arsip['file_arsip'] != "") {
+                    unlink('dokumen/' . $arsip['file_arsip']);
+                }
+                //random name
+            $nama_file = $file_arsip->getRandomName();
+            //ukuran file
+            $ukuran_file = $file_arsip->getSize('kb');
+            //if valid
+            $data = array(
+                'no_arsip' => $this->request->getPost('no_arsip'),
+                'idkategori' => $this->request->getPost('idkategori'),
+                'nama_arsip' => $this->request->getPost('nama_arsip'),
+                'deskripsi' => $this->request->getPost('deskripsi'),
+                'tgl_update' => date('Y-m-d'),
+                'iddepartemen' => session()->get('iddepartemen'),
+                'iduser' => session()->get('id_user'),
+                'file_arsip' => $nama_file,
+                'ukuran_file' => $ukuran_file,
+            );
+            $file_arsip->move('dokumen', $nama_file); //directory file
+            $this->Marsip->edit($data);
+            }
+            session()->setFlashdata('pesan', 'Arsip berhasil diubah.');
+            return redirect()->to(base_url('arsip'));
+        } else {
+            //if not valid
+            session()->setFlashdata('errors', \Config\Services::validation()->getErrors());
+            return redirect()->to(base_url('arsip/edit'));
         }
     }
 }

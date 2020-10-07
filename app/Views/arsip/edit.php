@@ -4,7 +4,7 @@
     <div class="col-md-8">
         <div class="box box-primary box-solid">
             <div class="box-header with-border">
-                <h3 class="box-title">Edit User</h3>
+                <h3 class="box-title">Edit Arsip</h3>
             </div>
             <div class="box-body">
 
@@ -19,69 +19,45 @@
                         </ul>
                     </div>
                 <?php } ?>
-                <?php echo form_open_multipart('user/update/' . $user['id_user']); ?>
-
+                <?php
+                echo form_open_multipart('arsip/update/' . $arsip['id_arsip']);
+                ?>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <label>Nama User</label>
-                        <input name="username" value="<?= $user['username'] ?>" class="form-control" placeholder="Enter nama user" required>
+                        <label>No. Arsip</label>
+                        <input name="no_arsip" type="email" class="form-control" value="<?= $arsip['no_arsip'] ?>" readonly>
                     </div>
                     <div class="col-md-6">
-                        <label>Email</label>
-                        <input name="email" value="<?= $user['email'] ?>" type="email" class="form-control" readonly>
+                        <label>Nama Arsip</label>
+                        <input name="nama_arsip" value="<?= $arsip['nama_arsip'] ?>" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <label>Password</label>
-                        <input name="password" value="<?= $user['password'] ?>" class="form-control" placeholder="Enter password user" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label>Status</label>
-                        <select name="level" class="form-control">
+                        <label>Kategori</label>
+                        <select name="idkategori" class="form-control">
                             <option value="
-                                <?= $user['level'] ?>">
-                                <?php if ($user['level'] == 1) {
-                                    echo 'Admin';
-                                } else {
-                                    echo 'User';
-                                } ?>
-                            </option>
-                            <option value="1">Admin</option>
-                            <option value="2">User</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Departemen</label>
-                        <select name="iddepartemen" class="form-control">
-                            <option value="
-                                <?= $user['iddepartemen'] ?>">
-                                <?= $user['nama_departemen'] ?>
-                            </option>
-                            <?php foreach ($departemen as $key => $value) { ?>
-                                <option value="
-                                    <?= $value['id_departemen'] ?>">
-                                    <?= $value['nama_departemen'] ?>
-                                </option>
+                            <?= $arsip['idkategori'] ?>">
+                            <?= $arsip['nama_kategori'] ?>
+                        </option>
+                            <?php foreach ($kategori as $key => $value) { ?>
+                                <option value="<?= $value['id_kategori'] ?>"><?= $value['nama_kategori'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>Ganti Foto</label>
-                            <input type="file" name="foto" class="form-control">
-                        </div>
-                        <div class="col-md-3">
-                            <img src="<?= base_url('img/' . $user['foto']) ?>" width="80px">
-                        </div>
+                    <div class="col-md-6">
+                        <label>Ganti File Arsip</label>
+                        <input type="file" name="file_arsip" class="form-control">
+                        <label class="text-danger">*Format file .pdf</label>
                     </div>
-
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea name="deskripsi" class="form-control" rows="4"><?= $arsip['deskripsi'] ?></textarea>
                 </div>
                 <div class="box-footer">
-                    <a href="<?= base_url('user') ?>" class="btn btn-primary">Kembali</a>
-                    <button type="submit" class="btn btn-primary pull-right">Update</button>
+                    <a href="<?= base_url('arsip') ?>" class="btn btn-primary">Kembali</a>
+                    <button type="submit" class="btn btn-primary pull-right">Simpan</button>
                 </div>
                 <?php echo form_close() ?>
 
