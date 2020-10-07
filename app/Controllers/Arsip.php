@@ -169,6 +169,7 @@ class Arsip extends BaseController
             $ukuran_file = $file_arsip->getSize('kb');
             //if valid
             $data = array(
+                'id_arsip' => $id,
                 'no_arsip' => $this->request->getPost('no_arsip'),
                 'idkategori' => $this->request->getPost('idkategori'),
                 'nama_arsip' => $this->request->getPost('nama_arsip'),
