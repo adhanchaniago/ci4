@@ -19,49 +19,43 @@
                         </ul>
                     </div>
                 <?php } ?>
-                <?php echo form_open_multipart('arsip/insert'); ?>
-
+                <?php
+                echo form_open_multipart('arsip/insert');
+                helper('text');
+                $no_arsip = date('dmY') . random_string('crypto', 6);
+                ?>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <label>Nama User</label>
-                        <input name="username" class="form-control" placeholder="Enter nama user" required>
+                        <label>No. Arsip</label>
+                        <input name="no_arsip" type="email" class="form-control" value="<?= $no_arsip ?>" readonly>
                     </div>
                     <div class="col-md-6">
-                        <label>Email</label>
-                        <input name="email" type="email" class="form-control" placeholder="Enter email user" required>
+                        <label>Nama Arsip</label>
+                        <input name="nama_arsip" class="form-control" placeholder="Enter arsip name" required>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea name="deskripsi" class="form-control" rows="4"></textarea>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <label>Password</label>
-                        <input name="password" class="form-control" placeholder="Enter password user" required>
+                        <label>File Arsip</label>
+                        <input type="file" name="file_arsip" class="form-control">
+                        <label class="text-danger">*Format .pdf</label>
                     </div>
                     <div class="col-md-6">
-                        <label>Status</label>
-                        <select name="level" class="form-control">
-                            <option value="">--Status user--</option>
-                            <option value="1">Admin</option>
-                            <option value="2">User</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>Departemen</label>
-                        <select name="iddepartemen" class="form-control">
-                            <option value="">--Pilih Departemen--</option>
-                            <?php foreach ($departemen as $key => $value) { ?>
-                                <option value="<?= $value['id_departemen'] ?>"><?= $value['nama_departemen'] ?></option>
+                        <label>Kategori</label>
+                        <select name="idkategori" class="form-control">
+                            <option value="">--Pilih Kategori--</option>
+                            <?php foreach ($kategori as $key => $value) { ?>
+                                <option value="<?= $value['id_kategori'] ?>"><?= $value['nama_kategori'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <label>Foto</label>
-                        <input type="file" name="foto" class="form-control">
-                    </div>
                 </div>
                 <div class="box-footer">
-                    <a href="<?= base_url('user') ?>" class="btn btn-primary">Kembali</a>
+                    <a href="<?= base_url('arsip') ?>" class="btn btn-primary">Kembali</a>
                     <button type="submit" class="btn btn-primary pull-right">Simpan</button>
                 </div>
                 <?php echo form_close() ?>

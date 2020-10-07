@@ -44,10 +44,12 @@ class Auth extends BaseController
             $cek = $this->Mauth->login($email, $password);
             if ($cek) {
                 session()->set('log', true);
+                session()->set('id_user', $cek['id_user']);
                 session()->set('username', $cek['username']);
                 session()->set('email', $cek['email']);
                 session()->set('level', $cek['level']);
                 session()->set('foto', $cek['foto']);
+                session()->set('iddepartemen', $cek['iddepartemen']);
                 return redirect()->to(base_url('home'));
             } else {
                 session()->setFlashdata('pesan', 'Login Gagal...!');
