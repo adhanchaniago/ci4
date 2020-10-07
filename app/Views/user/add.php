@@ -48,7 +48,7 @@
                 <div class="form-group row">
                     <div class="col-md-6">
                         <label>Departemen</label>
-                        <select name="id_departemen" class="form-control">
+                        <select name="iddepartemen" class="form-control">
                             <option value="">--Pilih Departemen--</option>
                             <?php foreach ($departemen as $key => $value) { ?>
                                 <option value="<?= $value['id_departemen'] ?>"><?= $value['nama_departemen'] ?></option>

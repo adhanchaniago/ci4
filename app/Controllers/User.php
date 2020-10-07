@@ -67,7 +67,7 @@ class User extends BaseController
                     'required' => '{field} required',
                 ]
             ],
-            'id_departemen' => [
+            'iddepartemen' => [
                 'label' => 'Departemen',
                 'rules' => 'required',
                 'errors' => [
@@ -94,7 +94,7 @@ class User extends BaseController
                 'email' => $this->request->getPost('email'),
                 'password' => $this->request->getPost('password'),
                 'level' => $this->request->getPost('level'),
-                'id_departemen' => $this->request->getPost('id_departemen'),
+                'iddepartemen' => $this->request->getPost('iddepartemen'),
                 'foto' => $nama_file,
             );
             $foto->move('img', $nama_file); //directory file
@@ -143,7 +143,7 @@ class User extends BaseController
                     'required' => '{field} required',
                 ]
             ],
-            'id_departemen' => [
+            'iddepartemen' => [
                 'label' => 'Departemen',
                 'rules' => 'required',
                 'errors' => [
@@ -166,7 +166,7 @@ class User extends BaseController
                     'username' => $this->request->getPost('username'),
                     'password' => $this->request->getPost('password'),
                     'level' => $this->request->getPost('level'),
-                    'id_departemen' => $this->request->getPost('id_departemen'),
+                    'iddepartemen' => $this->request->getPost('iddepartemen'),
                     // 'foto' => $nama_file,
                 );
                 // $foto->move('img', $nama_file); //directory file
@@ -184,7 +184,7 @@ class User extends BaseController
                     'username' => $this->request->getPost('username'),
                     'password' => $this->request->getPost('password'),
                     'level' => $this->request->getPost('level'),
-                    'id_departemen' => $this->request->getPost('id_departemen'),
+                    'iddepartemen' => $this->request->getPost('iddepartemen'),
                     'foto' => $nama_file,
                 );
                 $foto->move('img', $nama_file); //directory file
@@ -201,7 +201,7 @@ class User extends BaseController
         } else {
             //if not valid
             session()->setFlashdata('errors', \Config\Services::validation()->getErrors());
-            return redirect()->to(base_url('user/edit' . $id));
+            return redirect()->to(base_url('user/edit/' . $id));
         }
     }
 

@@ -9,7 +9,7 @@ class Muser extends Model
     public function getData()
     {
         return $this->db->table('user')
-            ->join('departemen', 'departemen.id = user.id_departemen', 'left')
+            ->join('departemen', 'departemen.id_departemen = user.iddepartemen', 'left')
             ->orderBy('id_user', 'DESC')
             ->get()
             ->getResultArray();
@@ -18,7 +18,7 @@ class Muser extends Model
     public function detailData($id)
     {
         return $this->db->table('user')
-            ->join('departemen', 'departemen.id_departemen = user.id_departemen', 'left')
+            ->join('departemen', 'departemen.id_departemen = user.iddepartemen', 'left')
             ->where('id_user', $id)
             ->get()
             ->getRowArray();

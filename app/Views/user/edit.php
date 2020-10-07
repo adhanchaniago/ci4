@@ -55,9 +55,9 @@
                 <div class="form-group row">
                     <div class="col-md-6">
                         <label>Departemen</label>
-                        <select name="id_departemen" class="form-control">
+                        <select name="iddepartemen" class="form-control">
                             <option value="
-                                <?= $user['id_departemen'] ?>">
+                                <?= $user['iddepartemen'] ?>">
                                 <?= $user['nama_departemen'] ?>
                             </option>
                             <?php foreach ($departemen as $key => $value) { ?>
