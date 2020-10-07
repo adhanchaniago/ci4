@@ -191,4 +191,19 @@ class Arsip extends BaseController
             return redirect()->to(base_url('arsip/edit'));
         }
     }
+
+    public function delete($id)
+    {
+        $arsip =  $this->Marsip->detailData($id);
+        if ($arsip['file_arsip'] != "") {
+            unlink('dokumen/' . $arsip['file_arsip']);
+        }
+
+        $data = array(
+            'id_arsip' => $id,
+        );
+        $this->Marsip->hapus($data);
+        session()->setFlashdata('pesan', 'Data berhasil dihapus.');
+        return redirect()->to(base_url('arsip'));
+    }
 }
