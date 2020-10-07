@@ -29,6 +29,7 @@
                             <th>Updated</th>
                             <th>User</th>
                             <th>Departemen</th>
+                            <th>File</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -44,8 +45,12 @@
                                 <td><?= $value['tgl_update']; ?></td>
                                 <td><?= $value['username']; ?></td>
                                 <td><?= $value['nama_departemen']; ?></td>
+                                <td class="text-center">
+                                    <a href="<?= base_url('arsip/pdf/' . $value['id_arsip']) ?>">
+                                        <i class="fa fa-file-pdf-o fa-2x label-danger"></i></a><br>
+                                    <?= number_format($value['ukuran_file'], 0); ?> Byte
+                                </td>
                                 <td>
-                                    <a href="<?= base_url('arsip/pdf/'.$value['id_arsip']) ?>" class="btn btn-sm btn-success">Detail</a>
                                     <a href="<?= base_url('arsip/edit/' . $value['id_arsip']) ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete<?= $value['id_arsip']; ?>">Hapus</button>
                                 </td>

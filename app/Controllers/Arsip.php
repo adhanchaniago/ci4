@@ -12,7 +12,7 @@ class Arsip extends BaseController
     {
         $this->Marsip = new Marsip();
         $this->Mkategori = new Mkategori();
-        helper('form');
+        helper('form','number');
     }
 
     public function index()
@@ -73,6 +73,8 @@ class Arsip extends BaseController
             $file_arsip = $this->request->getFile('file_arsip');
             //random name
             $nama_file = $file_arsip->getRandomName();
+            //ukuran file
+            $ukuran_file = $file_arsip->getSize('kb');
             //if valid
             $data = array(
                 'no_arsip' => $this->request->getPost('no_arsip'),
@@ -84,6 +86,7 @@ class Arsip extends BaseController
                 'iddepartemen' => session()->get('iddepartemen'),
                 'iduser' => session()->get('id_user'),
                 'file_arsip' => $nama_file,
+                'ukuran_file' => $ukuran_file,
             );
             $file_arsip->move('dokumen', $nama_file); //directory file
             $this->Marsip->add($data);
