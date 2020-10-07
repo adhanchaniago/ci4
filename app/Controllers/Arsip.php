@@ -83,7 +83,7 @@ class Arsip extends BaseController
                 'tgl_update' => date('Y-m-d'),
                 'iddepartemen' => session()->get('iddepartemen'),
                 'iduser' => session()->get('id_user'),
-                'file_arsip' => $file_arsip,
+                'file_arsip' => $nama_file,
             );
             $file_arsip->move('dokumen', $nama_file); //directory file
             $this->Marsip->add($data);
