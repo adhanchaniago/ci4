@@ -34,17 +34,8 @@
                         <input name="nama_arsip" class="form-control" placeholder="Enter arsip name" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Deskripsi</label>
-                    <textarea name="deskripsi" class="form-control" rows="4"></textarea>
-                </div>
                 <div class="form-group row">
-                    <div class="col-md-6">
-                        <label>File Arsip</label>
-                        <input type="file" name="file_arsip" class="form-control">
-                        <label class="text-danger">*Format .pdf</label>
-                    </div>
-                    <div class="col-md-6">
+                <div class="col-md-6">
                         <label>Kategori</label>
                         <select name="idkategori" class="form-control">
                             <option value="">--Pilih Kategori--</option>
@@ -53,6 +44,15 @@
                             <?php } ?>
                         </select>
                     </div>
+                    <div class="col-md-6">
+                        <label>File Arsip</label>
+                        <input type="file" name="file_arsip" class="form-control">
+                        <label class="text-danger">*Format file .pdf</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea name="deskripsi" class="form-control" rows="4"></textarea>
                 </div>
                 <div class="box-footer">
                     <a href="<?= base_url('arsip') ?>" class="btn btn-primary">Kembali</a>
