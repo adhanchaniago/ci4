@@ -206,4 +206,14 @@ class Arsip extends BaseController
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
         return redirect()->to(base_url('arsip'));
     }
+
+    public function viewpdf($id)
+    {
+        $data = array(
+            'title' => 'View Dokumen',
+            'arsip' => $this->Marsip->detailData($id),
+            'isi' => 'arsip/vpdf'
+        );
+        return view('layout/wrapper', $data);
+    }
 }

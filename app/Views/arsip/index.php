@@ -46,7 +46,7 @@
                                 <td><?= $value['username']; ?></td>
                                 <td><?= $value['nama_departemen']; ?></td>
                                 <td class="text-center">
-                                    <a href="<?= base_url('arsip/pdf/' . $value['id_arsip']) ?>">
+                                    <a href="<?= base_url('arsip/viewpdf/' . $value['id_arsip']) ?>">
                                         <i class="fa fa-file-pdf-o fa-2x label-danger"></i></a><br>
                                     <?= number_format($value['ukuran_file'], 0); ?> Byte
                                 </td>
